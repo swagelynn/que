@@ -1,0 +1,48 @@
+name: build and push image to ghcr
+
+permissions:
+  contents: read
+  packages: write
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check_changes:
+    runs-on: ubuntu-latest
+    outputs:
+      relevant: ${{ steps.filter.outputs.relevant }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Check if relevant files changed
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            relevant:
+              - 'Dockerfile'
+              - '*.go'
+
+  build:
+    needs: check_changes
+    if: ${{ needs.check_changes.outputs.relevant == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t ghcr.io/swagelynn/que:latest .
+          docker push ghcr.io/swagelynn/que:latest
