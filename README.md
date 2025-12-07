@@ -1,5 +1,5 @@
 <p align="center">
-  <h1>vigil</h1>
+  <h1>que</h1>
   <br>
   a lightweight solution to q&a on a personal site
   <br>
