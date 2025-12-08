@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -29,7 +30,18 @@ func main() {
 	g.POST("/question", makeLimiterMiddleware(limiter.Rate{Period: time.Minute, Limit: 1}), func(ctx *gin.Context) {
 		var body Question
 
-		ctx.ShouldBindJSON(&body)
+		err := ctx.ShouldBindJSON(&body)
+
+		if err != nil {
+			ctx.JSON(http.StatusBadRequest, gin.H{})
+			return
+		}
+
+		// half assed anti spam
+		if len([]byte(body.Title)) > 30 {
+			ctx.JSON(http.StatusBadRequest, gin.H{})
+			return
+		}
 
 		ctx.JSON(writeQuestion(body), gin.H{})
 	})
