@@ -17,7 +17,7 @@ func notify(q Question) {
 		embed := hook.NewEmbed().SetTitle(q.Title).SetDescription(q.Body).SetAuthor(q.Author, "https://duckduckgo.com/?t=ffab&q=%22"+q.Author+"%22", "https://files.catbox.moe/7hz92d.jpeg")
 
 		if err := client.SendEmbed(embed); err != nil {
-			fmt.Println("Invalid webhook url supplied")
+			fmt.Println("Invalid webhook url supplied: " + err.Error())
 		}
 	}
 }

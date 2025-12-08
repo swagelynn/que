@@ -14,8 +14,6 @@ var sentPath string = "sent.json"
 var displayPath string = "display.json"
 
 func ensureFiles() {
-	fmt.Println(dataPath)
-
 	requiredFiles := []string{sentPath, displayPath}
 
 	for _, r := range requiredFiles {

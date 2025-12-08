@@ -37,12 +37,6 @@ func main() {
 			return
 		}
 
-		// half assed anti spam
-		if len([]byte(body.Title)) > 30 {
-			ctx.JSON(http.StatusBadRequest, gin.H{})
-			return
-		}
-
 		ctx.JSON(writeQuestion(body), gin.H{})
 
 		notify(body)
