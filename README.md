@@ -15,4 +15,6 @@ services:
       - ./data:/quedata
     ports:
       - 5438:5438
+    environment:
+      - DISCORD_WEBHOOK=https://discord.com/api/webhooks/../..
 ```
