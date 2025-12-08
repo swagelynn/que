@@ -16,5 +16,5 @@ services:
     ports:
       - 5438:5438
     environment:
-      - DISCORD_WEBHOOK=https://discord.com/api/webhooks/../..
+      - DISCORD_WEBHOOK=https://discord.com/api/webhooks/../.. \# (optional)
 ```
