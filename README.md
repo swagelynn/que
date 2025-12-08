@@ -13,8 +13,7 @@ services:
     image: ghcr.io/swagelynn/que:latest
     volumes:
       - ./data:/quedata
-    ports:
-      - 5438:5438
+    network_mode: host
     environment:
       - DISCORD_WEBHOOK=https://discord.com/api/webhooks/../.. 
 ```
