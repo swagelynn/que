@@ -34,7 +34,7 @@ func main() {
 		ctx.JSON(writeQuestion(body), gin.H{})
 	})
 
-	g.GET("/questions", makeLimiterMiddleware(limiter.Rate{Period: time.Minute, Limit: 50}), func(ctx *gin.Context) {
+	g.GET("/questions", makeLimiterMiddleware(limiter.Rate{Period: time.Minute, Limit: 240}), func(ctx *gin.Context) {
 		ctx.String(200, string(getDisplayData()))
 	})
 
