@@ -14,10 +14,10 @@ func notify(q Question) {
 		fmt.Println(webhook)
 		client := hook.NewClient(webhook)
 
-		embed := hook.NewEmbed().SetTitle(q.Title).SetDescription(q.Body).SetAuthor(q.Author, "https://duckduckgo.com/?t=ffab&q=%22"+q.Author+"%22", "https://files.catbox.moe/7hz92d.jpeg")
+		embed := hook.NewEmbed().SetTitle(q.Title).SetDescription(q.Body).SetFooter("- "+q.Author, "")
 
 		if err := client.SendEmbed(embed); err != nil {
-			fmt.Println("Invalid webhook url supplied: " + err.Error())
+			fmt.Println("webhook error: " + err.Error())
 		}
 	}
 }

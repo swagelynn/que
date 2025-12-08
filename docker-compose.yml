@@ -1,9 +1,0 @@
-services:
-  que:
-    build: .
-    container_name: que
-    restart: unless-stopped
-    volumes:
-      - ./data:/quedata
-    ports:
-      - 5438:5438
