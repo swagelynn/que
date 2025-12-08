@@ -8,7 +8,7 @@ import (
 )
 
 func notify(q Question) {
-	webhook := os.Getenv("DISCORD_WEBHOOk")
+	webhook := os.Getenv("DISCORD_WEBHOOK")
 
 	if webhook != "" {
 		client := hook.NewClient(webhook)
